@@ -23,7 +23,17 @@ add_action( 'wp_enqueue_scripts', 'child_theme_configurator_css', 10 );
 
 // END ENQUEUE PARENT ACTION
 
+//Bouton Admin 
 
+add_filter( 'wp_nav_menu_items','add_admin_link', 10, 2 );
+function add_admin_link( $items, $args ) {
+    // est-ce que l'utilisateur est bien connecté ?
+    if (is_user_logged_in()) {
+        //si oui, on affiche le lien admin
+        $items .= '<li class="menu-item menu-item-type-post_type menu-item-object-page"><a class="menu-link" href="'. get_admin_url() .'">Admin</a></li>';
+    }
+    return $items;
+}
 
 
 
